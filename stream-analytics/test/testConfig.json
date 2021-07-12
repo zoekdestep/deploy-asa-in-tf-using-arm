@@ -1,0 +1,31 @@
+{
+  "Script": "asaquery.asaql",
+  "TestCases": [
+    {
+      "Name": "Test 1",
+      "Inputs": [
+        {
+          "InputAlias": "dataStream",
+          "Type": "Data Stream",
+          "Format": "Json",
+          "FilePath": "data/test1/inputs/dataStream.json",
+          "ScriptType": "InputMock"
+        },
+        {
+          "InputAlias": "referenceData",
+          "Type": "Reference data",
+          "Format": "Json",
+          "FilePath": "data/test1/inputs/referenceData.json",
+          "ScriptType": "InputMock"
+        }
+      ],
+      "ExpectedOutputs": [
+        {
+          "OutputAlias": "sbTopic",
+          "FilePath": "data/test1/outputs/sbTopic.json",
+          "Required": true
+        }
+      ]
+    }
+  ]
+}

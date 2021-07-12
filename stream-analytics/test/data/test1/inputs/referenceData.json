@@ -1,0 +1,14 @@
+[
+    {
+        "SensorId": "1",
+        "SensorName": "Sensor 1"
+    },
+    {
+        "SensorId": "2",
+        "SensorName": "Sensor 3"
+    },
+    {
+        "SensorId": "3",
+        "SensorName": "Sensor 3"
+    }
+]
