@@ -8,6 +8,9 @@
     },
     "variables": {},
     "resources": [
+
+// Create Azure Stream Analytics resource
+
         {
             "name": "[parameters('parameterBlock').name]",
             "type": "Microsoft.StreamAnalytics/streamingjobs",
@@ -21,6 +24,9 @@
                 "outputStartMode": "JobStartTime",
                 "compatibilityLevel": "1.2",
                 "inputs": [
+
+// Define main incoming data stream from Azure Event Hub
+
                     {
                         "name":"dataStream",
                         "properties": {
@@ -47,6 +53,9 @@
                             }
                         }
                     },
+
+// Define reference data stream from Azure SQL Server
+
                     {
                         "name": "referenceData",
                         "properties": {
@@ -69,6 +78,9 @@
                         }
                     }
                 ],
+
+// Define Azure Stream Analytics query
+
                 "transformation": {
                     "name": "asaQuery",
                     "properties": {
@@ -76,6 +88,9 @@
                         "query": "[parameters('parameterBlock').asa_query]"
                     }
                 },
+
+// Define data output into Azure Service Bus Topic
+
                 "outputs": [
                     {
                         "name": "sbTopic",

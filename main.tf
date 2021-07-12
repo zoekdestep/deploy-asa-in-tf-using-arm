@@ -1,10 +1,10 @@
-# Create a resource group for the required resources
+# Create a resource group for below resources
 resource "azurerm_resource_group" "rgsa" {
   name     = "stream-analytics-rg"
   location = var.location
 }
 
-# Create an Event Hub Namespace and corresponding Event Hub for data input into Azure Stream Analytics
+# Create an Azure Event Hub Namespace and corresponding Event Hub for data input into Azure Stream Analytics
 resource "azurerm_eventhub_namespace" "ehnamespace" {
   name                = "input-event-hub-namespace"
   location            = var.location
@@ -64,7 +64,7 @@ resource "azurerm_sql_database" "sqldb" {
   server_name         = azurerm_sql_server.sqlserver.name
 }
 
-# Service bus for output
+# Create an Azure Service Bus Namespace and Topic for data output
 resource "azurerm_servicebus_namespace" "sb" {
   name                = "servicebus-output"
   location            = var.location
@@ -88,7 +88,7 @@ resource "azurerm_servicebus_topic_authorization_rule" "sbtopicauthrulewrite" {
   manage              = false
 }
 
-# Storage account SA
+# Create an Azure blob storage account for Azure Stream Analytics
 resource "azurerm_storage_account" "ehstor" {
   name                     = "ehstorage1"
   resource_group_name      = azurerm_resource_group.rgsa.name
@@ -97,7 +97,7 @@ resource "azurerm_storage_account" "ehstor" {
   account_replication_type = "GRS"
 }
 
-# ARM
+# Define ARM deployment template for the Azure Stream Analytics deployment
 resource "azurerm_resource_group_template_deployment" "azure_stream_analytics" {
   name                = "azure_stream_analytics"
   resource_group_name = azurerm_resource_group.rgsa.name
