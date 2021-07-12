@@ -10,5 +10,9 @@
     {
         "SensorId": "3",
         "SensorName": "Sensor 3"
+    },
+    {
+        "SensorId": "4",
+        "SensorName": "Sensor 4"
     }
 ]
