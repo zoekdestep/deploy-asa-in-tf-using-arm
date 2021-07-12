@@ -29,9 +29,6 @@ jobs:
     - name: Creating the right resources
       run: sh ./state-resources.sh
       env:
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         STATE_RG_NAME: ${{ secrets.STATE_RG_NAME }}
         STATE_STOR_NAME: ${{ secrets.STATE_STOR_NAME }}
         CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
