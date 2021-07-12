@@ -1,0 +1,5 @@
+{
+    "name": "stream-analytics",
+    "startFile": "asaquery.asaql",
+    "configurations": []
+}

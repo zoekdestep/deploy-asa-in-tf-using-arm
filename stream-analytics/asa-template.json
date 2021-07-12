@@ -1,0 +1,110 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "parameterBlock": {
+            "type": "Object"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('parameterBlock').name]",
+            "type": "Microsoft.StreamAnalytics/streamingjobs",
+            "apiVersion": "2017-04-01-preview",
+            "tags": {},
+            "location": "[parameters('parameterBlock').location]",
+            "properties": {
+                "sku": {
+                    "name": "Standard"
+                },
+                "outputStartMode": "JobStartTime",
+                "compatibilityLevel": "1.2",
+                "inputs": [
+                    {
+                        "name":"dataStream",
+                        "properties": {
+                            "type": "Stream",
+                            "datasource": {
+                                "type": "Microsoft.ServiceBus/EventHub",
+                                "properties": {
+                                    "serviceBusNamespace": "[parameters('parameterBlock').eh_namespace]",
+                                    "sharedAccessPolicyName": "[parameters('parameterBlock').eh_sharedAccessPolicyName]",
+                                    "sharedAccessPolicyKey": "[parameters('parameterBlock').eh_sharedAccessPolicyKey]",
+                                    "authenticationMode": "ConnectionString",
+                                    "eventHubName": "[parameters('parameterBlock').eh_name]",
+                                    "consumerGroupName": "[parameters('parameterBlock').eh_consumer_group_name]"
+                                }
+                            },
+                            "serialization": {
+                                "type": "Json",
+                                "properties": {
+                                    "encoding": "UTF8"
+                                }
+                            },
+                            "compression": {
+                                "type": "none"
+                            }
+                        }
+                    },
+                    {
+                        "name": "referenceData",
+                        "properties": {
+                            "type": "Reference",
+                            "datasource": {
+                                "type": "Microsoft.Sql/Server/Database",
+                                "properties": {
+                                    "server": "[parameters('parameterBlock').server]",
+                                    "database": "[parameters('parameterBlock').database]",
+                                    "user": "[parameters('parameterBlock').user]",
+                                    "password": "[parameters('parameterBlock').password]",
+                                    "refreshType": "RefreshPeriodicallyWithFull",
+                                    "refreshRate": "[parameters('parameterBlock').refreshRate]",
+                                    "fullSnapshotQuery": "[parameters('parameterBlock').referenceQuery]"
+                                }
+                            },
+                            "compression": {
+                                "type": "none"
+                            }
+                        }
+                    }
+                ],
+                "transformation": {
+                    "name": "asaQuery",
+                    "properties": {
+                        "streamingUnits": "[parameters('parameterBlock').streamingUnits]",
+                        "query": "[parameters('parameterBlock').asa_query]"
+                    }
+                },
+                "outputs": [
+                    {
+                        "name": "sbTopic",
+                        "properties":{
+                            "datasource": {
+                                "type": "Microsoft.ServiceBus/Topic",
+                                "properties": {
+                                    "serviceBusNamespace": "[parameters('parameterBlock').sb_namespace]",
+                                    "sharedAccessPolicyName": "[parameters('parameterBlock').sb_sharedAccessPolicyName]",
+                                    "sharedAccessPolicyKey": "[parameters('parameterBlock').sb_sharedAccessPolicyKey]",
+                                    "authenticationMode": "ConnectionString",
+                                    "topicName": "[parameters('parameterBlock').sb_topic_name]"
+                                }
+                            },
+                            "serialization": {
+                                "type": "Json",
+                                "properties": {
+                                    "encoding": "UTF8"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "jobStorageAccount": {
+                    "accountName": "[parameters('parameterBlock').sa_accountName]",
+                    "accountKey": "[parameters('parameterBlock').sa_accountKey]",
+                    "authenticationMode": "ConnectionString"
+                }
+            }
+        }
+    ]
+}
