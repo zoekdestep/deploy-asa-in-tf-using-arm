@@ -4,9 +4,9 @@
 
 In this scenario, we want to create an Azure Stream Analytics job that takes input data from Azure Event Hub and **uses reference data from an Azure SQL Database** - and then outputs the data after transformation into a Service Bus Topic. We want to deploy the resources using [Terraform](https://www.terraform.io/intro/index.html), simply because it is an awesome Infrastructure as Code (IaC) tool that allows you to build, change and version infrastructure.
 
-The challenge with deploying this? As described in [this issue](https://github.com/terraform-providers/terraform-provider-azurerm/issues/9231), the `azurerm` Terraform provider currently does not include support for SQL reference data lookup - it currently only supports Azure blob storage reference data lookup.
+The challenge with deploying this? As described in [this issue](https://github.com/terraform-providers/terraform-provider-azurerm/issues/9231), the `azurerm` Terraform provider currently does not include support for SQL reference data lookup - it currently only supports Azure blob storage reference data lookup. Also there is also no support for [compatibility level 1.2](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-compatibility-level#compatibility-level-12) as described in this [issue](https://github.com/terraform-providers/terraform-provider-azurerm/issues/6660).
 
-But not to worry! There is another way to deploy Azure Stream Analytics including SQL reference data in Terraform: using ARM Template deployments.
+But not to worry! There is another way to deploy Azure Stream Analytics including SQL reference data in Terraform: using [ARM Template deployments](https://docs.microsoft.com/azure/stream-analytics/quick-create-azure-resource-manager).
 
 ## :popcorn: Requirements
 
