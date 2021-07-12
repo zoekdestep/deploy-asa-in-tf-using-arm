@@ -21,7 +21,7 @@ jobs:
         node-version: '15.x'
     # Install azure-streamanalytics-cicd
     - name: Install dependencies
-      run: npm i azure-streamanalytics-cicd
+      run: sudo npm install -g azure-streamanalytics-cicd --unsafe-perm=true --allow-root
     # Run tests
     - name: Run ASA Tests
-      run: azure-streamanalytics-cicd test -project stream-analytics/asaproj.json -testConfigPath stream-analytics/test/testConfig.json
+      run: sudo azure-streamanalytics-cicd test -project stream-analytics/asaproj.json -testConfigPath stream-analytics/test/testConfig.json
