@@ -21,12 +21,13 @@ Before you get started, make sure the following is in place:
   - `ARM_CLIENT_ID` - The ID of the created Service Principal.
   - `ARM_CLIENT_SECRET` - The secret of the created Service Principal.
 
-- Terraform needs a place to store its state file. Therefore, add four additional GitHub Secrets that describe the desired resource group name, storage name and container name where the state file will be added, and the name of the state file. Please note: these resources don't need to exist yet.
+- Terraform needs a place to store its state file. Therefore, add five additional GitHub Secrets that describe the desired resource group name, storage name and container name where the state file will be added, the name of the state file, and the region where you want these state file resources deployed. Please note: these resources don't need to exist yet.
 
   - `STATE_RG_NAME` - The name of the resource group in which the state file should be added.
   - `STATE_STOR_NAME` - The name of the storage account in which the state file should be added.
   - `CONTAINER_NAME` - The name of the storage container where the state file should be added.
   - `STATE_KEY` - The name of the state file, for example examplestatefile.tfstate.
+  - `LOCATION` - The Azure region in which you want above state file resources deployed.
 
 ## :factory: How it works
 
