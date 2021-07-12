@@ -1,2 +1,8 @@
-SELECT *
-FROM dataStream
+SELECT 
+    DS.*,
+    RD.* INTO sbTopic 
+FROM 
+    dataStream AS DS 
+    LEFT JOIN referenceData AS RD 
+    ON DS.SensorID = RD.SensorId 
+
