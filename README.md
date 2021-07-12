@@ -41,6 +41,8 @@ Once you run the [GitHub Actions workflow](./.github/workflows/terraform-github.
 
 - The plan is then executed upon when there is a push to the `main` branch.
 
+- The repo also includes [Azure Stream Analytics unit tests](./stream-analytics/test) and a [corresponding pipeline](./.github/workflows/asa-ci.yml) - because tests are, well, nice and good practice :). You can find more information on testing for Azure Stream Analytics [here](https://www.npmjs.com/package/azure-streamanalytics-cicd).
+
 Please note that above set-up does not include any streaming data. The defined Azure Stream Analytics and SQL queries are therefore fictitious.
 
 ## :shower: Clean-up
