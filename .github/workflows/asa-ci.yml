@@ -1,27 +1,33 @@
-name: 'Azure Stream Analytics CI Tests'
+name: "Azure Stream Analytics CI Tests"
 
 on:
   push:
     branches:
-    - main
-    - feature/asa-unit-tests
+      - main
+      - feature/asa-unit-tests
 
 jobs:
   build:
-    name: 'Test ASA'
+    name: "Test ASA"
     runs-on: ubuntu-latest
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '15.x'
-    # Install azure-streamanalytics-cicd
-    - name: Install dependencies
-      run: sudo npm install -g azure-streamanalytics-cicd --unsafe-perm=true --allow-root
-    # Run tests
-    - name: Run ASA Tests
-      run: sudo azure-streamanalytics-cicd test -project stream-analytics/asaproj.json -testConfigPath stream-analytics/test/testConfig.json
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "15.x"
+      # Install azure-streamanalytics-cicd
+      - name: Install dependencies
+        run: sudo npm install -g azure-streamanalytics-cicd --unsafe-perm=true --allow-root
+      # Run tests
+      - name: Run ASA Tests
+        run: sudo azure-streamanalytics-cicd test -project stream-analytics/asaproj.json -testConfigPath stream-analytics/test/testConfig.json
+      # Archive test results
+      - name: Archive test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: tests-report
+          path: stream-analytics/testResultSummary.json
