@@ -1,4 +1,4 @@
-# Deploying Azure Stream Analytics in Terraform using ARM templates to include SQL Reference Data
+# Deploying an Azure Stream Analytics Job with Terraform using ARM templates to include SQL Reference Data
 
 ## :compass: Introduction
 
